@@ -14,12 +14,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableMongoRepositories
 public class BullseyesApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(BullseyesApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run( BullseyesApplication.class, args );
+	}
 
-    @Bean
-    public javax.validation.Validator localValidatorFactoryBean() {
-        return new LocalValidatorFactoryBean();
-    }
+	@Bean
+	public javax.validation.Validator localValidatorFactoryBean() {
+		return new LocalValidatorFactoryBean();
+	}
 }

@@ -14,10 +14,10 @@ import org.springframework.test.web.servlet.ResultActions;
 @AutoConfigureMockMvc
 public class BullseyesApplicationTests {
 
-    @Autowired
-    public MockMvc mvc;
+	@Autowired
+	public MockMvc mvc;
 
-    public ResultActions perform(RequestBuilder request) throws Exception {
-        return mvc.perform(request);
-    }
+	public ResultActions perform(RequestBuilder request) throws Exception {
+		return mvc.perform( request );
+	}
 }

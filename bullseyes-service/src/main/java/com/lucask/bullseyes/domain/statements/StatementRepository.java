@@ -1,4 +1,4 @@
-package com.lucask.bullseyes.domain.statement;
+package com.lucask.bullseyes.domain.statements;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
