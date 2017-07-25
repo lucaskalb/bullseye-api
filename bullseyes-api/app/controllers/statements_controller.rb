@@ -35,7 +35,7 @@ class StatementsController < ApplicationController
 
   def statement_params
     # whitelist params
-    params.permit(:title, :created_by)
+    params.permit(:title, :category, :status, :due_date)
   end
 
   def set_statement
