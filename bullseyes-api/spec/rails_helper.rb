@@ -22,4 +22,14 @@ RSpec.configure do |config|
 
   config.include RequestSpecHelper, type: :request
   config.include FactoryGirl::Syntax::Methods
+
+  config.before :each do
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.start
+  end
+
+  config.after do
+    DatabaseCleaner.clean
+  end
+
 end

@@ -1,6 +1,7 @@
 class StatementsController < ApplicationController
 
   before_action :set_statement, only: [:title, :category, :status, :due_date]
+  before_action :set_statement, only: [:id]
 
   # GET /statements
   def index
@@ -16,7 +17,7 @@ class StatementsController < ApplicationController
 
   # GET /statements/:id
   def show
-    json_response(@statement)
+    json_response( Statement.find( params[:id] ) )
   end
 
   # PUT /statements/:id
@@ -34,11 +35,7 @@ class StatementsController < ApplicationController
   private
 
   def statement_params
-    # whitelist params
     params.permit(:title, :category, :status, :due_date)
   end
 
-  def set_statement
-    @statement = Statement.find(params[:id])
-  end
 end
