@@ -32,14 +32,14 @@ RSpec.describe 'Statement API', type: :request do
     end
 
     context 'when the record does not exist' do
-      let(:stament_id) { 9999 }
+      let(:statement_id) { 100 }  
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
       end
 
       it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find Statement/)
+        expect(response.body).to match(/Record not found/)
       end
     end
   end
@@ -58,6 +58,18 @@ RSpec.describe 'Statement API', type: :request do
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
+      end
+    end
+    
+    context 'when the request is invalid' do
+      before { post '/statements', params: { title: 'Blah' } }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body).to match(/Validation failed: Created by can't be blank/)
       end
     end
   end

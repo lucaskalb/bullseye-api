@@ -31,3 +31,18 @@
 
 en:
   hello: "Hello world"
+  mongoid:
+    models:
+      statements: 
+        title: "Titulo"
+        category: "Category"
+    attributes:
+      statements:
+        title: "Titulo"
+        category: "Category"
+    errors:
+      models:
+        statements:
+          attributes:
+            category:
+              blank: "is required"

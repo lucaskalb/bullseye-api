@@ -30,5 +30,8 @@ module BullseyesApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.log_level = :debug
+
+    config.exception_handler = { db: false }
+
   end
 end

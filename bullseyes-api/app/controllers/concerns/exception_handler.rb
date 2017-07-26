@@ -2,11 +2,11 @@ module ExceptionHandler
   extend ActiveSupport::Concern
 
   included do
-    rescue_from ActiveRecord::RecordNotFound do |e|
-      json_response({ message: e.message }, :not_found)
+    rescue_from Mongoid::Errors::DocumentNotFound do |e|
+      json_response({ message: "Record not found" }, :not_found)
     end
 
-    rescue_from ActiveRecord::RecordInvalid do |e|
+    rescue_from Mongoid::Errors::Validations do |e|
       json_response({ message: e.message }, :unprocessable_entity)
     end
   end
