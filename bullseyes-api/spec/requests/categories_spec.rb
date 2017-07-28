@@ -74,6 +74,21 @@ RSpec.describe 'Categories API', type: :request do
           .to match(/Validation failed: Title can't be blank/)
       end
     end
+
+     context 'when the category title is duplicated' do
+      let(:title) { categories.first.title }
+      let(:invalid_attributes) { { title: title }.to_json }
+      before { post '/categories', params: invalid_attributes, headers: headers }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+          .to match(/Validation failed: Title has already been taken/)
+      end
+    end
   end
 
   describe 'PUT /categories/:id' do

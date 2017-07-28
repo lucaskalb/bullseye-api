@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :category do
-    title { Faker::StarWars.character }
+    title { Faker::Name.first_name }
   end
 end
