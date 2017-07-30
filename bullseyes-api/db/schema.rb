@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170728215702) do
+ActiveRecord::Schema.define(version: 20170729220206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20170728215702) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.date "date"
+    t.decimal "value"
+    t.text "comment"
+    t.bigint "statement_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["statement_id"], name: "index_payments_on_statement_id"
   end
 
   create_table "statements", force: :cascade do |t|
@@ -43,6 +53,7 @@ ActiveRecord::Schema.define(version: 20170728215702) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "payments", "statements"
   add_foreign_key "statements", "categories"
   add_foreign_key "statements", "users"
 end

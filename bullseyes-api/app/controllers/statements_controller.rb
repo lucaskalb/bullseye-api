@@ -1,16 +1,16 @@
 class StatementsController < ApplicationController
-  before_action :set_statement, only: [:show, :update, :destroy, :cancel]
+  before_action :set_statement, only: [ :show, :update, :destroy ]
+  before_action :set_by_statement_id, only: [ :cancel ]
 
   # GET /statements
   def index
-    @statements = Statement.all
-    json_response(@statements)
+    json_response(Statement.all)
   end
 
   # POST /statements
   def create
     @parameters = statement_params
-    @parameters["user_id"] = current_user.id
+    @parameters[:user_id] = current_user.id
     json_response( Statement.create!( @parameters ), :created )
   end
 
@@ -46,7 +46,11 @@ class StatementsController < ApplicationController
   end
 
   def set_statement
-    @statement = Statement.where( id: params[:id], user_id: current_user.id).take!
+    @statement = Statement.where( id: params[:id], user_id: current_user.id ).take!
+  end
+
+  def set_by_statement_id
+    @statement = Statement.where( id: params[:statement_id], user_id: current_user.id ).take!
   end
 
 end

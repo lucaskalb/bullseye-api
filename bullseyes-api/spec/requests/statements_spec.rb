@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Categories API', type: :request do
+RSpec.describe 'Statements API', type: :request do
   let(:user) { create(:user) }
   let(:category) { create(:category) }
   let!(:statements) { create_list( :statement, 10, user_id: user.id, category_id: category.id ) }
@@ -35,7 +35,7 @@ RSpec.describe 'Categories API', type: :request do
     end
 
     context 'when the record does not exist' do
-      let(:statement_id) { 100 }
+      let(:statement_id) { 0 }
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
@@ -48,14 +48,14 @@ RSpec.describe 'Categories API', type: :request do
   end
 
   describe 'POST /statements' do
-    let(:valid_attributes) { 
-      { 
+    let(:valid_attributes) {
+      {
         title: 'Restaurant',
         due_date: Date.today,
         observation: 'It was a lunch' ,
         expected_value: 10.00,
         category_id: category.id
-      }.to_json 
+      }.to_json
     }
 
     context 'when the request is valid' do
@@ -76,11 +76,11 @@ RSpec.describe 'Categories API', type: :request do
     end
 
     context 'when the request is invalid' do
-      let(:invalid_attributes) { 
-        { 
+      let(:invalid_attributes) {
+        {
           title: nil,
           due_date: nil,
-        }.to_json 
+        }.to_json
       }
       before { post '/statements', params: invalid_attributes, headers: headers }
 
@@ -90,9 +90,9 @@ RSpec.describe 'Categories API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Title can't be blank/)
+        .to match(/Title can't be blank/)
         expect(response.body)
-          .to match(/Category can't be blank/)
+        .to match(/Category can't be blank/)
       end
     end
   end
@@ -121,7 +121,7 @@ RSpec.describe 'Categories API', type: :request do
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
-      
+
       statement = Statement.all.first
       expect( statement.status ).to eq( "canceled" )
     end
@@ -134,5 +134,4 @@ RSpec.describe 'Categories API', type: :request do
       expect(response).to have_http_status(204)
     end
   end
-
 end

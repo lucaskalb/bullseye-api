@@ -4,5 +4,6 @@ FactoryGirl.define do
     status :opened
     due_date Date.today
     expected_value { Faker::Number.decimal(2) }
+    observation { Faker::Lorem.paragraph }
   end
 end

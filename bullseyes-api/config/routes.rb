@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
-  resources :categories
-  resources :statements
-  put 'statements/:id/cancel', to: 'statements#cancel'
   post 'auth/login', to: 'authentication#authenticate'
   post 'signup', to: 'users#create'
+
+  resources :categories
+  resources :statements do
+    put    'cancel' , to: 'statements#cancel'
+
+    get    'payment', to: 'payments#show'
+    post   'payment', to: 'payments#create'
+    put    'payment', to: 'payments#update'
+    delete 'payment', to: 'payments#destroy'
+  end
+
+  get 'payments', to: 'payments#index'
 end
