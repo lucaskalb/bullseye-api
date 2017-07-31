@@ -68,7 +68,7 @@ RSpec.describe 'Payments API', type: :request do
     context 'when the request is valid' do
       before { post "/statements/#{statement_to_pay_id}/payment", params: valid_attributes, headers: headers }
 
-      it 'creates a statement' do
+      it 'creates a payment' do
         expect( json['date'] ).to     eq( Date.today.to_s )
         expect( json['value'] ).to    eq( "10.0" )
         expect( json['comment'] ).to  eq( 'Paid with my money' )

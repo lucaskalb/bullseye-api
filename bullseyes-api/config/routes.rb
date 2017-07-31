@@ -12,5 +12,8 @@ Rails.application.routes.draw do
     delete 'payment', to: 'payments#destroy'
   end
 
-  get 'payments', to: 'payments#index'
+  post 'nubank/extract',   to: 'nubank#extract'
+  post 'nubank/create',    to: 'nubank#create'
+
+  get  'payments', to: 'payments#index'
 end
